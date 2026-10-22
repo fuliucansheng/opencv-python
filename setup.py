@@ -2,6 +2,7 @@ import io
 import os
 import os.path
 import sys
+import sysconfig
 import runpy
 import subprocess
 import re
@@ -105,7 +106,7 @@ def main():
     rearrange_cmake_output_data = {
         "cv2": (
             [r"bin/opencv_videoio_ffmpeg\d{4}%s\.dll" % ("_64" if is64 else "")]
-            if os.name == "nt"
+            if os.name == "nt" and sysconfig.get_platform() != "win-arm64"
             else []
         )
         +
